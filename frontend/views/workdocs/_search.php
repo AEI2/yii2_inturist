@@ -21,7 +21,7 @@ use yii\widgets\ActiveForm;
 
     <?= $form->field($model, 'docdate') ?>
 
-    <?= $form->field($model, 'doctype') ?>
+    <?= $form->field($model, 'typedoc') ?>
 
     <?= $form->field($model, 'massive') ?>
 

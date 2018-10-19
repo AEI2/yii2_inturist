@@ -31,7 +31,7 @@ $this->params['breadcrumbs'][] = $this->title;
             'id',
             'docnum',
             'docdate',
-            'doctype',
+            'typedoc',
             'massive:ntext',
         ],
     ]) ?>

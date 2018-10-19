@@ -10,16 +10,18 @@ use frontend\models\Workdocs;
 /**
  * WorkdocSearch represents the model behind the search form of `frontend\models\Workdocs`.
  */
-class WorkdocSearch extends Workdocs
+class WorkdocsSearch extends Workdocs
 {
     /**
      * {@inheritdoc}
      */
+    public $typedocName;
+
     public function rules()
     {
         return [
-            [['id', 'docnum'], 'integer'],
-            [['docdate', 'doctype', 'massive'], 'safe'],
+            [['id', 'docnum', 'typedoc'], 'integer'],
+            [['docdate', 'massive','typedocName'], 'safe'],
         ];
     }
 
@@ -49,11 +51,23 @@ class WorkdocSearch extends Workdocs
             'query' => $query,
         ]);
 
+        $dataProvider->setSort([
+            'attributes' => [
+                'id',
+                'typedocName' => [
+                    'asc' => ['typedoc.name' => SORT_ASC],
+                    'desc' => ['typedoc.name' => SORT_DESC],
+                    'label' => 'Тип документа'
+                ]
+            ]
+        ]);
+
         $this->load($params);
 
         if (!$this->validate()) {
             // uncomment the following line if you do not want to return any records when validation fails
             // $query->where('0=1');
+            $query->joinWith(['typedoc']);
             return $dataProvider;
         }
 
@@ -62,10 +76,13 @@ class WorkdocSearch extends Workdocs
             'id' => $this->id,
             'docnum' => $this->docnum,
             'docdate' => $this->docdate,
+            'typedoc' => $this->typedoc,
         ]);
+        $query->joinWith(['typedoc' => function ($q) {
+            $q->where('typedoc.name LIKE "%' . $this->typedocName . '%"');
+        }]);
 
-        $query->andFilterWhere(['like', 'doctype', $this->doctype])
-            ->andFilterWhere(['like', 'massive', $this->massive]);
+        $query->andFilterWhere(['like', 'massive', $this->massive]);
 
         return $dataProvider;
     }

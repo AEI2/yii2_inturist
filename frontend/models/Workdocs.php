@@ -10,8 +10,11 @@ use Yii;
  * @property int $id
  * @property int $docnum
  * @property string $docdate
- * @property string $doctype
+ * @property int $doctype
  * @property string $massive
+ *
+ * @property Typedoc $\F0
+ * @property Workdoctostudents[] $workdoctostudents
  */
 class Workdocs extends \yii\db\ActiveRecord
 {
@@ -29,10 +32,10 @@ class Workdocs extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['docnum'], 'integer'],
+            [['docnum', 'typedoc'], 'integer'],
             [['docdate'], 'safe'],
             [['massive'], 'string'],
-            [['doctype'], 'string', 'max' => 255],
+            //[['typedocName'], 'exist', 'skipOnError' => true, 'targetClass' => Typedoc::className(), 'targetAttribute' => ['typedoc' => 'id']],
         ];
     }
 
@@ -45,8 +48,29 @@ class Workdocs extends \yii\db\ActiveRecord
             'id' => 'ID',
             'docnum' => 'Docnum',
             'docdate' => 'Docdate',
-            'doctype' => 'Doctype',
+            'typedoc' => 'typedoc',
+            'typedocName' => 'Тип документа',
             'massive' => 'Massive',
         ];
+    }
+
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getTypedoc()
+    {
+        return $this->hasOne(Typedoc::className(), ['id' => 'typedoc_id']);
+    }
+
+    public function getTypedocName() {
+
+        return $this->typedoc->name;
+    }
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getWorkdoctostudents()
+    {
+        return $this->hasMany(Workdoctostudents::className(), ['workdoc_id' => 'id']);
     }
 }

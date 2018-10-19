@@ -25,13 +25,22 @@ $this->params['breadcrumbs'][] = $this->title;
         'columns' => [
             ['class' => 'yii\grid\SerialColumn'],
 
-            'id',
             'docnum',
             'docdate',
-            'doctype',
+
+            'typedocName',
             'massive:ntext',
 
-            ['class' => 'yii\grid\ActionColumn'],
+            [
+                'class' => 'yii\grid\ActionColumn',
+                'template' => '{view} {update} {delete} {createword}',
+                'buttons' => [
+                    'createword' => function ($url,$model,$key) {
+
+                        return Html::a('Сформировать', $url);
+
+                    },
+            ]      ],
         ],
     ]); ?>
 </div>

@@ -40,7 +40,7 @@ AppAsset::register($this);
         ['label' => 'Студенты', 'url' => ['/students/index']],
         ['label' => 'Документы студентов', 'url' => ['/studentsdocs/index']],
         ['label' => 'Проживания', 'url' => ['/studentshouse/index']],
-        ['label' => 'Документы', 'url' => ['/workdoc/index']],
+        ['label' => 'Документы', 'url' => ['/workdocs/index']],
         ['label' => 'About', 'url' => ['/site/about']],
         ['label' => 'Contact', 'url' => ['/site/contact']],
     ];

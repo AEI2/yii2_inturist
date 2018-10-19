@@ -37,7 +37,7 @@ class Students extends \yii\db\ActiveRecord
         return [
             [['birthday'], 'safe'],
             [['uniqum'], 'string', 'max' => 5],
-            [['lastname', 'firstname', 'middlename', 'born', 'cityborn'], 'string', 'max' => 255],
+            [['lastname', 'firstname', 'middlename', 'born', 'cityborn','sex'], 'string', 'max' => 255],
             [['uniqum'], 'unique'],
         ];
     }
@@ -56,12 +56,19 @@ class Students extends \yii\db\ActiveRecord
             'birthday' => 'Birthday',
             'born' => 'Born',
             'cityborn' => 'Cityborn',
+            'sex' => 'Пол',
         ];
     }
 
     /**
      * @return \yii\db\ActiveQuery
      */
+    public function addOne()
+    {
+        $this->uniqum = 'AAA00';
+
+    }
+
     public function getStudentsdocs()
     {
         return $this->hasMany(Studentsdocs::className(), ['students_id' => 'id']);
@@ -73,5 +80,10 @@ class Students extends \yii\db\ActiveRecord
     public function getStudentshouses()
     {
         return $this->hasMany(Studentshouse::className(), ['students_id' => 'id']);
+    }
+
+    public function getWorkdocs()
+    {
+        return $this->hasMany(Workdocs::className(), ['students_id' => 'id']);
     }
 }

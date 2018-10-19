@@ -26,6 +26,8 @@ use yii\widgets\ActiveForm;
 
     <?= $form->field($model, 'cityborn')->textInput(['maxlength' => true]) ?>
 
+    <?= $form->field($model, 'sex')->textInput(['maxlength' => true]) ?>
+
     <div class="form-group">
         <?= Html::submitButton('Save', ['class' => 'btn btn-success']) ?>
     </div>

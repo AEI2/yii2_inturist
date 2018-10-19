@@ -2,6 +2,7 @@
 
 use yii\helpers\Html;
 use yii\widgets\ActiveForm;
+use yii\widgets\Pjax;
 
 /* @var $this yii\web\View */
 /* @var $model frontend\models\Workdocs */
@@ -16,17 +17,24 @@ use yii\widgets\ActiveForm;
 
     <?= $form->field($model, 'docdate')->textInput() ?>
 
-    <?= $form->field($model, 'doctype')->textInput(['maxlength' => true]) ?>
-
-
-    <div class="form-group">
-        <?= Html::submitButton('Save', ['class' => 'btn btn-success']) ?>
-    </div>
+    <?= $form->field($model, 'typedoc')->textInput(['maxlength' => true]) ?>
 
     <div class="form-group">
         <?= Html::submitButton('Save', ['class' => 'btn btn-success']) ?>
     </div>
 
-    <?php ActiveForm::end(); ?>
+    <?php
+    ActiveForm::end(); ?>
+
+    <?php
+    Pjax::begin(['enablePushState' => false]); ?>
+    <?= $this->render('_formone', ['model' => $model,'students' => $students]) ?>
+    <?php Pjax::end(); ?>
+
+
+
+
+
+
 
 </div>
