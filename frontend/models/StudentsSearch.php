@@ -15,6 +15,7 @@ class StudentsSearch extends Students
     /**
      * {@inheritdoc}
      */
+
     public function rules()
     {
         return [

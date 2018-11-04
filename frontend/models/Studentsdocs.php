@@ -9,14 +9,16 @@ use Yii;
  *
  * @property int $id
  * @property int $students_id
- * @property string $type_doc
+ * @property int $typepassport_id
  * @property int $seryes
  * @property string $number
  * @property string $startdate
  * @property string $enddate
- * @property string $status
+ * @property int $typestatus_id
  *
  * @property Students $students
+ * @property Typepassport $typepassport
+ * @property Typestatus $typestatus
  */
 class Studentsdocs extends \yii\db\ActiveRecord
 {
@@ -34,10 +36,12 @@ class Studentsdocs extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['students_id', 'seryes'], 'integer'],
+            [['students_id', 'typepassport_id', 'seryes', 'typestatus_id'], 'integer'],
             [['startdate', 'enddate'], 'safe'],
-            [['type_doc', 'number', 'status'], 'string', 'max' => 255],
+            [['number'], 'string', 'max' => 255],
             [['students_id'], 'exist', 'skipOnError' => true, 'targetClass' => Students::className(), 'targetAttribute' => ['students_id' => 'id']],
+            [['typepassport_id'], 'exist', 'skipOnError' => true, 'targetClass' => Typepassport::className(), 'targetAttribute' => ['typepassport_id' => 'id']],
+            [['typestatus_id'], 'exist', 'skipOnError' => true, 'targetClass' => Typestatus::className(), 'targetAttribute' => ['typestatus_id' => 'id']],
         ];
     }
 
@@ -49,12 +53,15 @@ class Studentsdocs extends \yii\db\ActiveRecord
         return [
             'id' => 'ID',
             'students_id' => 'Students ID',
-            'type_doc' => 'Type Doc',
-            'seryes' => 'Seryes',
-            'number' => 'Number',
-            'startdate' => 'Startdate',
-            'enddate' => 'Enddate',
-            'status' => 'Status',
+            'studentsName' => 'Уник Студента',
+            'typepassport_id' => 'Тип документа',
+            'typepassportName' => 'Тип документа',
+            'seryes' => 'Серия',
+            'number' => 'Номер',
+            'startdate' => 'Дата выдачи',
+            'enddate' => 'Действителен до',
+            'typestatus_id' => 'Статус',
+            'typestatusName' => 'Статус',
         ];
     }
 
@@ -64,5 +71,32 @@ class Studentsdocs extends \yii\db\ActiveRecord
     public function getStudents()
     {
         return $this->hasOne(Students::className(), ['id' => 'students_id']);
+    }
+    public function getStudentsname()
+    {
+        return $this->students->uniqum;
+    }
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getTypepassport()
+    {
+        return $this->hasOne(Typepassport::className(), ['id' => 'typepassport_id']);
+    }
+
+    public function getTypepassportname() {
+
+        return $this->typepassport->name;
+    }
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getTypestatus()
+    {
+        return $this->hasOne(Typestatus::className(), ['id' => 'typestatus_id']);
+    }
+    public function getTypestatusName() {
+
+        return $this->typestatus->name;
     }
 }

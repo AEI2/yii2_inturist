@@ -49,13 +49,13 @@ class Students extends \yii\db\ActiveRecord
     {
         return [
             'id' => 'ID',
-            'uniqum' => 'Uniqum',
-            'lastname' => 'Lastname',
-            'firstname' => 'Firstname',
-            'middlename' => 'Middlename',
-            'birthday' => 'Birthday',
-            'born' => 'Born',
-            'cityborn' => 'Cityborn',
+            'uniqum' => 'Уникальный код',
+            'lastname' => 'Фамилия',
+            'firstname' => 'Имя',
+            'middlename' => 'Отчество',
+            'birthday' => 'Дата рождения',
+            'born' => 'Страна рождения',
+            'cityborn' => 'Город рождения',
             'sex' => 'Пол',
         ];
     }
@@ -63,11 +63,7 @@ class Students extends \yii\db\ActiveRecord
     /**
      * @return \yii\db\ActiveQuery
      */
-    public function addOne()
-    {
-        $this->uniqum = 'AAA00';
 
-    }
 
     public function getStudentsdocs()
     {

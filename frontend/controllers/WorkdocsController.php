@@ -6,6 +6,7 @@ use frontend\models\Workdoctostudents;
 use Yii;
 use frontend\models\Workdocs;
 use frontend\models\Students;
+use frontend\models\Studentsdocs;
 use frontend\models\WorkdocsSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
@@ -155,7 +156,7 @@ class WorkdocsController extends Controller
         {
             //$prefix='#'.$i;
             $prefix='';
-
+            $passport=studentsdocs::find()->where(['students_id'=>$one->id])->one();
             $fio=$one->lastname.' '.$one->firstname.' '.$one->middlename;
 
             $templateProcessor->setValue('id#'.$i, $i+1);
@@ -163,7 +164,7 @@ class WorkdocsController extends Controller
             $templateProcessor->setValue('born#'.$i, $one->born);
             $templateProcessor->setValue('sex#'.$i, $one->sex);
             $templateProcessor->setValue('birthday#'.$i, $one->birthday);
-            $templateProcessor->setValue('passportnum#'.$i, '112112');
+            $templateProcessor->setValue('passportnum#'.$i, $passport->seryes.' '.$passport->number);
             $i++;
         }
 

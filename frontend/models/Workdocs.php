@@ -35,7 +35,7 @@ class Workdocs extends \yii\db\ActiveRecord
             [['docnum', 'typedoc'], 'integer'],
             [['docdate'], 'safe'],
             [['massive'], 'string'],
-            //[['typedocName'], 'exist', 'skipOnError' => true, 'targetClass' => Typedoc::className(), 'targetAttribute' => ['typedoc' => 'id']],
+            [['typedocName'], 'exist', 'skipOnError' => true, 'targetClass' => Typedoc::className(), 'targetAttribute' => ['typedoc' => 'id']],
         ];
     }
 
@@ -46,11 +46,11 @@ class Workdocs extends \yii\db\ActiveRecord
     {
         return [
             'id' => 'ID',
-            'docnum' => 'Docnum',
-            'docdate' => 'Docdate',
+            'docnum' => 'Номер документа',
+            'docdate' => 'Дата документа',
             'typedoc' => 'typedoc',
             'typedocName' => 'Тип документа',
-            'massive' => 'Massive',
+            'massive' => 'Список студентов',
         ];
     }
 
