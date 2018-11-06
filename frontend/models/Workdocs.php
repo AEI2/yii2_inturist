@@ -18,6 +18,7 @@ use Yii;
  */
 class Workdocs extends \yii\db\ActiveRecord
 {
+    public $students_id;
     /**
      * {@inheritdoc}
      */
@@ -32,7 +33,7 @@ class Workdocs extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['docnum', 'typedoc'], 'integer'],
+            [['docnum', 'typedoc','students_id'], 'integer'],
             [['docdate'], 'safe'],
             [['massive'], 'string'],
             [['typedocName'], 'exist', 'skipOnError' => true, 'targetClass' => Typedoc::className(), 'targetAttribute' => ['typedoc' => 'id']],
